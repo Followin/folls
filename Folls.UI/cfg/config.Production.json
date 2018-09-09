@@ -1,0 +1,6 @@
+{
+  "mongo": {
+    "ConnectionString": "mongodb://admin:admin@mongo/folls",
+    "Database": "folls"
+  }
+}
