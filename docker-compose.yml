@@ -7,10 +7,12 @@ services:
     restart: always
     container_name: folls.ui
     ports:
-      - 8080:80
+      - 5002:80
       
   mongo:
-    image: mongo
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
     container_name: mongo
     restart: always
     ports:

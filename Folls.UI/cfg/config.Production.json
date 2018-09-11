@@ -1,6 +1,6 @@
 {
   "mongo": {
-    "ConnectionString": "mongodb://admin:admin@mongo/folls",
+    "ConnectionString": "mongodb://root:toor@mongo",
     "Database": "folls"
   }
 }
