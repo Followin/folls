@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: folls.ui
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: folls.ui
+  template:
+    metadata:
+      labels:
+        app: folls.ui
+    spec:
+      containers:
+      - name: folls-ui
+        image: dlike/folls.ui
+        ports:
+          - containerPort: 80
+
