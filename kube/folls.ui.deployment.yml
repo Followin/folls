@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: folls.ui
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: folls.ui
@@ -14,7 +14,10 @@ spec:
     spec:
       containers:
       - name: folls-ui
-        image: dlike/folls.ui
+        image: dlike/folls.ui:latest
+        imagePullPolicy: Always
         ports:
           - containerPort: 80
-
+        env:
+          - name: Something
+            value: "Test3"

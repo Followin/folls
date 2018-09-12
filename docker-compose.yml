@@ -13,7 +13,7 @@ services:
     build:
       context: ./mongo
       dockerfile: Dockerfile
-    container_name: mongo
+    container_name: folls-mongo
     restart: always
     ports:
       - 27017:27017
