@@ -1,31 +1,30 @@
-using System;
-using System.Threading.Tasks;
-using Folls.UI.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 
 namespace Folls.UI.Controllers
 {
-    [Route("api/home")]
     public class HomeController : Controller
     {
-        private readonly IMongoDatabase database;
-
-        public HomeController(IOptions<Config> configOptions)
+        private readonly IHostingEnvironment _hostingEnv;
+        
+        public HomeController(IHostingEnvironment hostingEnv)
         {
-            Console.WriteLine($"The connection string is {configOptions.Value.ConnectionString}");
-            var client = new MongoClient(configOptions.Value.ConnectionString);
-            database = client.GetDatabase(configOptions.Value.Database);
+            _hostingEnv = hostingEnv;
         }
         
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [Route("/{*url}")]
+        public IActionResult Index()
         {
-            var notes = database.GetCollection<Note>("note");
-            var allNotes = await notes.Find(_ => true).ToListAsync();
-            
-            return Ok(allNotes);
+            var file = System.IO.File.OpenRead(Path.Combine(_hostingEnv.WebRootPath, "index.html"));
+
+            return File(file, "text/html");
+        }
+
+        [Route("/__internal/healthcheck")]
+        public IActionResult HealthCheck()
+        {
+            return Ok("Works");
         }
     }
 }

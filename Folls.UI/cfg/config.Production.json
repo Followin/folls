@@ -1,6 +1,5 @@
 {
   "mongo": {
-    "ConnectionString": "mongodb://folls-mongo-0.folls-mongo.default.svc.cluster.local:27017",
-    "Database": "folls"
+    "ConnectionString": "mongodb://folls-mongo-0.folls-mongo.default.svc.cluster.local:27017"
   }
 }

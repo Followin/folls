@@ -15,10 +15,10 @@ namespace Folls.UI
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     {
-                        config.AddJsonFile(
-                            $"cfg/config.{hostingContext.HostingEnvironment.EnvironmentName}.json",
-                            optional: false,
-                            reloadOnChange: true);
+                        config
+                            .AddJsonFile($"cfg/config.json")
+                            .AddJsonFile($"cfg/config.{hostingContext.HostingEnvironment.EnvironmentName}.json")
+                            .AddEnvironmentVariables();
                     })
                 .UseStartup<Startup>();
     }

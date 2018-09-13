@@ -31,7 +31,9 @@ namespace Folls.UI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app
+                .UseStaticFiles()
+                .UseMvc();
         }
     }
 }
