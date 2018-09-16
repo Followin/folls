@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Folls.UI.Models
+namespace Folls.API.Models
 {
     public class Note
     {

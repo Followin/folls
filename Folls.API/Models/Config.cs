@@ -1,4 +1,4 @@
-namespace Folls.UI.Models
+namespace Folls.API.Models
 {
     public class Config
     {

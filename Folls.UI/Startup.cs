@@ -1,5 +1,4 @@
-﻿using Folls.UI.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +19,6 @@ namespace Folls.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.Configure<Config>(configuration.GetSection("mongo"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
