@@ -15,7 +15,7 @@ RUN dotnet restore
 
 COPY . ./
 COPY --from=frontend-build-env /app/out ./wwwroot
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o out --no-restore
 
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
