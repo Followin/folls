@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,9 @@ namespace Folls.UI.Controllers
         }
         
         [Route("/{*url}")]
-        public IActionResult Index()
+        public IActionResult Index(string url)
         {
+            Console.WriteLine(url);
             var file = System.IO.File.OpenRead(Path.Combine(_hostingEnv.WebRootPath, "index.html"));
 
             return File(file, "text/html");

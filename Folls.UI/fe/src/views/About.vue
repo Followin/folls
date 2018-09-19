@@ -10,17 +10,19 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import axios from '../axios-client';
 
     export default {
       data() {
+          console.log(process.env);
           return {
               notes: []
           }
       },
       
       created() {
-          axios.get('http://192.168.99.100:5003/api/notes').then(response => {
+          console.log(process.env);
+          axios.get('notes').then(response => {
               this.notes = response.data;
           }).catch(error => {
               console.log(error);
