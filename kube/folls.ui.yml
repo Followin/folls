@@ -20,4 +20,25 @@ spec:
           - containerPort: 80
         env:
           - name: Something
-            value: "Test3"
+            value: "Test14"
+          - name: VUE_APP_API_BASE_URL
+            value: "/api/api"
+          - name: NODE_ENV
+            value: "development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: folls-ui
+  labels:
+    app: folls.ui
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: folls.ui
+

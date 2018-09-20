@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: folls-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  rules:
+    - host: blue-piano.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: folls-ui
+            servicePort: 80
+        - path: /api
+          backend:
+            serviceName: folls-api
+            servicePort: 80
