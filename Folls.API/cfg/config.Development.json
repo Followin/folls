@@ -1,0 +1,5 @@
+{
+  "mongo": {
+    "connectionString": "mongodb://root:toor@192.168.99.100:27017"
+  }
+}

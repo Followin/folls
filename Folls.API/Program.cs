@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace Folls.UI
+namespace Folls.API
 {
     public class Program
     {
@@ -13,6 +13,13 @@ namespace Folls.UI
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        config
+                            .AddJsonFile("cfg/config.json")
+                            .AddJsonFile($"cfg/config.{hostingContext.HostingEnvironment.EnvironmentName}.json")
+                            .AddEnvironmentVariables();
+                    })
                 .UseStartup<Startup>();
     }
 }

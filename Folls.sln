@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Folls.UI", "Folls.UI\Folls.UI.csproj", "{0DFDE9C4-04BB-4B51-9015-BB0A8F9D586E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Folls.API", "Folls.API\Folls.API.csproj", "{FD5D6668-B59E-4549-9CD3-9E0FEB47397E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0DFDE9C4-04BB-4B51-9015-BB0A8F9D586E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DFDE9C4-04BB-4B51-9015-BB0A8F9D586E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DFDE9C4-04BB-4B51-9015-BB0A8F9D586E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD5D6668-B59E-4549-9CD3-9E0FEB47397E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD5D6668-B59E-4549-9CD3-9E0FEB47397E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD5D6668-B59E-4549-9CD3-9E0FEB47397E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD5D6668-B59E-4549-9CD3-9E0FEB47397E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
