@@ -68,8 +68,6 @@ tearup:
     - kubectl config use-context default
     - kubectl config view
     - kubectl delete namespace $FEATURE_NAME
-  only:
-    - /^feature\/.*$
   when: manual
   environment: 
     name: $CI_COMMIT_REF_NAME
