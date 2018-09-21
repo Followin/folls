@@ -47,7 +47,7 @@ deploy:
     - /^feature\/.*$/
 
 tearup:
-  stage: tearup
+  stage: deploy
   image: alpine
   variables:
     GIT_STRATEGY: none
@@ -68,4 +68,3 @@ tearup:
   environment: 
     name: $CI_COMMIT_REF_NAME
     action: stop
-
