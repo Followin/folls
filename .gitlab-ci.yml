@@ -35,10 +35,10 @@ deploy:
     - mkdir -p $HOME/.kube
     - echo ${KUBE_CONFIG} | base64 -d > $HOME/.kube/config
     - kubectl config view
-    - sed 's/{{image}}/'"$CONTAINER_UI_IMAGE"'/g' ./kube/folls.ui.yml > ./kube/folls.ui.yml
-    - sed 's/{{image}}/'"$CONTAINER_API_IMAGE"'/g' ./kube/folls.api.yml > ./kube/folls.api.yml
-    - sed 's/{{namespace}}/develop/g' ./kube/folls.namespace.yml > ./kube/folls.namespace.yml
-    - sed 's/{{subdomain}}/develop./g' ./kube/folls.ingress.yml > ./kube/folls.ingress.yml
+    - sed 's,{{image}},'"$CONTAINER_UI_IMAGE"',g' ./kube/folls.ui.yml > ./kube/folls.ui.yml
+    - sed 's,{{image}},'"$CONTAINER_API_IMAGE"',g' ./kube/folls.api.yml > ./kube/folls.api.yml
+    - sed 's,{{namespace}},develop,g' ./kube/folls.namespace.yml > ./kube/folls.namespace.yml
+    - sed 's,{{subdomain}},develop.,g' ./kube/folls.ingress.yml > ./kube/folls.ingress.yml
     - kubectl apply -f ./kube/
   only:
     - develop
