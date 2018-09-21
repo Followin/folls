@@ -31,6 +31,7 @@ deploy:
   environment:
     name: $CI_COMMIT_REF_NAME
   script:
+    - echo 'FEATURE - '"$FEATURE_NAME"
     - apk update && apk add --no-cache curl
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
@@ -42,8 +43,8 @@ deploy:
     - kubectl config view
     - sed -i 's,{{image}},'"$CONTAINER_UI_IMAGE"',g' ./kube/folls.ui.yml
     - sed -i 's,{{image}},'"$CONTAINER_API_IMAGE"',g' ./kube/folls.api.yml
-    - sed -i 's,{{namespace}},'"$FEATRURE_NAME"',g' ./kube/folls.namespace.yml
-    - sed -i 's,{{subdomain}},'"$FEATRURE_NAME"'.,g' ./kube/folls.ingress.yml
+    - sed -i 's,{{namespace}},'"$FEATURE_NAME"',g' ./kube/folls.namespace.yml
+    - sed -i 's,{{subdomain}},'"$FEATURE_NAME"'.,g' ./kube/folls.ingress.yml
     - kubectl apply -f ./kube/folls.namespace.yml
     - kubectl apply -n $FEATURE_NAME -f ./kube/
   only:
