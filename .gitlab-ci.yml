@@ -30,6 +30,8 @@ deploy:
   image: alpine
   environment:
     name: $CI_COMMIT_REF_NAME
+    url: http://$FEATURE_NAME.blue-piano.com
+    on_stop: tearup
   script:
     - echo 'FEATURE - '"$FEATURE_NAME"
     - apk update && apk add --no-cache curl
