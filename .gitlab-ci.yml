@@ -41,6 +41,7 @@ deploy:
     - sed 's,{{image}},'"$CONTAINER_API_IMAGE"',g' ./kube/folls.api.yml > ./kube/folls.api.yml
     - sed 's,{{namespace}},develop,g' ./kube/folls.namespace.yml > ./kube/folls.namespace.yml
     - sed 's,{{subdomain}},develop.,g' ./kube/folls.ingress.yml > ./kube/folls.ingress.yml
+    - cat ./kube/folls.namespace.yml
     - kubectl apply -f ./kube/folls.namespace.yml
     - kubectl apply -n develop -f ./kube/
   only:
