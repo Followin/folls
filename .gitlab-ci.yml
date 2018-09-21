@@ -13,7 +13,7 @@ variables:
 build:
   stage: build
   script:
-    - echo DOCKER_PASS
+    - echo $DOCKER_PASS
     - docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
     - docker build --pull -t $CONTAINER_UI_IMAGE ./Folls.UI
     - docker push $CONTAINER_UI_IMAGE
