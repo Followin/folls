@@ -32,8 +32,10 @@ deploy:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - mkdir -p $HOME/.kube
-    - echo ${KUBE_CONFIG} | base64 -d > $HOME/.kube/config
+    - kubectl config set-cluster blue-cluster --server="$KUBE_URL" --insecure-skip-tls-verify=true
+    - kubectl config set-credentials admin --username="$KUBE_USER" --password="$KUBE_PASS"
+    - kubectl config set-context default --cluster=blue-cluster --user=admin
+    - kubectl config use-context default
     - kubectl config view
     - sed 's,{{image}},'"$CONTAINER_UI_IMAGE"',g' ./kube/folls.ui.yml > ./kube/folls.ui.yml
     - sed 's,{{image}},'"$CONTAINER_API_IMAGE"',g' ./kube/folls.api.yml > ./kube/folls.api.yml
