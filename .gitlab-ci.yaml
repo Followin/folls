@@ -1,0 +1,44 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build
+  - deploy
+
+variables:
+  CONTAINER_UI_IMAGE: dlike/folls.ui:$CI_COMMIT_SHA
+  CONTAINER_API_IMAGE: dlike/folls.api:$CI_COMMIT_SHA
+
+build:
+  stage: build
+  script:
+    - docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
+    - docker build --pull -t $CONTAINER_UI_IMAGE ./Folls.UI
+    - docker push $CONTAINER_UI_IMAGE
+    - docker build --pull -t $CONTAINER_API_IMAGE ./Folls.API
+    - docker push $CONTAINER_API_IMAGE
+  only:
+    - develop
+
+deploy:
+  stage: deploy
+  image: apline
+  environment:
+    name: develop
+  script:
+    - apk update && apk add --no-cache curl
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
+    - mv ./kubectl /usr/local/bin/kubectl
+    - echo ${KUBE_CONFIG} | base64 -d > ${KUBECONFIG}
+    - kubectl config use-context blue-cluster
+    - sed 's/{{image}}/'"$CONTAINER_UI_IMAGE"'/g' ./kube/folls.ui.yml > ./kube/folls.ui.yml
+    - sed 's/{{image}}/'"$CONTAINER_API_IMAGE"'/g' ./kube/folls.api.yml > ./kube/folls.api.yml
+    - sed 's/{{namespace}}/develop/g' ./kube/folls.namespace.yml > ./kube/folls.namespace.yml
+    - sed 's/{{subdomain}}/develop./g' ./kube/folls.ingress.yml > ./kube/folls.ingress.yml
+    - kubectl apply -f ./kube/
+  only:
+    - develop
+
+

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: folls-api
-        image: dlike/folls.api:latest
+        image: {{image}}
         imagePullPolicy: Always
         ports:
           - containerPort: 80
