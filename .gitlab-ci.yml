@@ -10,6 +10,9 @@ variables:
   CONTAINER_UI_IMAGE: dlike/folls.ui:$CI_COMMIT_SHA
   CONTAINER_API_IMAGE: dlike/folls.api:$CI_COMMIT_SHA
 
+before_script:
+  - export FEATURE_NAME=$(echo $CI_COMMIT_REF_NAME | sed 's/feature\///g')
+
 build:
   stage: build
   script:
@@ -39,10 +42,10 @@ deploy:
     - kubectl config view
     - sed -i 's,{{image}},'"$CONTAINER_UI_IMAGE"',g' ./kube/folls.ui.yml
     - sed -i 's,{{image}},'"$CONTAINER_API_IMAGE"',g' ./kube/folls.api.yml
-    - sed -i 's,{{namespace}},'"$CI_COMMIT_REF_NAME"',g' ./kube/folls.namespace.yml
-    - sed -i 's,{{subdomain}},'"$CI_COMMIT_REF_NAME"'.,g' ./kube/folls.ingress.yml
+    - sed -i 's,{{namespace}},'"$FEATRURE_NAME"',g' ./kube/folls.namespace.yml
+    - sed -i 's,{{subdomain}},'"$FEATRURE_NAME"'.,g' ./kube/folls.ingress.yml
     - kubectl apply -f ./kube/folls.namespace.yml
-    - kubectl apply -n $CI_COMMIT_REF_NAME -f ./kube/
+    - kubectl apply -n $FEATURE_NAME -f ./kube/
   only:
     - /^feature\/.*$/
 
@@ -61,7 +64,7 @@ tearup:
     - kubectl config set-context default --cluster=blue-cluster --user=admin
     - kubectl config use-context default
     - kubectl config view
-    - kubectl delete namespace $CI_COMMIT_REF_NAME
+    - kubectl delete namespace $FEATURE_NAME
   only:
     - /^feature\/.*$
   when: manual
