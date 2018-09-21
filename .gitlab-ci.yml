@@ -14,7 +14,7 @@ build:
   stage: build
   script:
     - echo $DOCKER_PASS
-    - docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
+    - echo $DOCKER_PASS | docker login -u $DOCKER_LOGIN --password-stdin
     - docker build --pull -t $CONTAINER_UI_IMAGE ./Folls.UI
     - docker push $CONTAINER_UI_IMAGE
     - docker build --pull -t $CONTAINER_API_IMAGE ./Folls.API
